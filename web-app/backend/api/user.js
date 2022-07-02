@@ -23,6 +23,8 @@ router.post('/add', async(req, res) => {
     const user = req.body.user;
     const email = req.body.email;
     const accountno = req.body.accountno;
+    const address = req.body.address;
+    const mobile = req.body.mobile;
     const password = req.body.password;
 
     try {
@@ -41,7 +43,7 @@ router.post('/add', async(req, res) => {
         console.log('user is used')
     }
 
-    const newUser = new User({ user, email, accountno, password });
+    const newUser = new User({ user, email, accountno, address, mobile, password });
     console.log(newUser)
 
     try {

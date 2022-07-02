@@ -6,16 +6,22 @@ const auth = require('../middleware/auth')
 router.use(express.json())
 
 router.route('/').get((req, res) => {
-    Supply.find()
+
+    console.log('id', req.query.id)
+
+    Supply.find({ user: req.query.id })
         .then(supply => res.json(supply))
         .catch(err => res.status(400).json('Error: ' + err));
 })
 
 router.post('/add', async(req, res) => {
     console.log(req.body)
-    const list = req.body;
+    const list = req.body.list,
+        user = req.body.user,
+        address = req.body.address,
+        mobile = req.body.mobile;
     console.log(list)
-    const newSupply = new Supply({ list });
+    const newSupply = new Supply({ list, user, address, mobile });
 
     try {
         await newSupply.save();
