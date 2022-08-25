@@ -35,16 +35,6 @@ const userSchema = new Schema({
         type: String,
         required: true,
     },
-    cart: [{
-        desc: {
-            type: String,
-            required: true
-        },
-        piece: {
-            type: Number,
-            required: true
-        }
-    }],
     tokens: [{
         token: {
             type: String,
@@ -79,7 +69,6 @@ userSchema.statics.findByCredentials = async(user, password) => {
         if (!userr) {
             return 'user not found'
         }
-        console.log('userr', userr)
         const isMatch = await bcrypt.compare(password, userr.password)
         if (!isMatch) {
             return 'pass not matched'

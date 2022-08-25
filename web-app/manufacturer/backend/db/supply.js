@@ -2,14 +2,11 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const supplySchema = new Schema({
-    desc: {
-        type: String,
-        required: true
-    },
-    piece: {
-        type: Number,
-        required: true
-    },
+    list: [{
+        _id: false,
+        desc: String,
+        piece: Number
+    }],
     user: {
         type: String,
         required: true,

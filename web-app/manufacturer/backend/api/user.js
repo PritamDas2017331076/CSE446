@@ -2,7 +2,6 @@ const { dblClick } = require('@testing-library/user-event/dist/click');
 const express = require('express')
 const router = express.Router();
 const User = require('../db/user')
-const Userb = require('../../bank-app/backend/db/user')
 const auth = require('../middleware/auth')
 
 router.use(express.json())
@@ -28,7 +27,6 @@ router.post('/add', async(req, res) => {
     const address = req.body.address;
     const mobile = req.body.mobile;
     const password = req.body.password;
-    const cart = []
 
     try {
         User.findOne({ user: user }, function(err, user) {
@@ -110,35 +108,6 @@ router.patch('/:id', async(req, res) => {
         if (!userr)
             return res.status(404).send()
         res.status(200).send(userr)
-    } catch (e) {
-        res.status(500).send(e.message)
-    }
-})
-
-router.patch('/addcart/:id', async(req, res) => {
-    let arr = []
-    try {
-        const user = await User.findById({ _id: req.params.id })
-        console.log(user)
-        if (!user)
-            return res.status(404).send()
-        arr = user.cart
-        console.log('arr', arr)
-    } catch (e) {
-        console.log(e)
-        res.status(400).send()
-    }
-    console.log(req.body)
-    arr.push(req.body)
-    const chg = { cart: arr }
-
-
-
-    try {
-        const user = await User.findByIdAndUpdate(req.params.id, chg, { new: true, runValidators: true })
-        if (!user)
-            return res.status(404).send()
-        res.status(200).send(user)
     } catch (e) {
         res.status(500).send(e.message)
     }
