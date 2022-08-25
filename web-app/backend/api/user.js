@@ -24,9 +24,9 @@ router.get('/me', auth, async(req, res) => {
 router.post('/add', async(req, res) => {
     const user = req.body.user;
     const email = req.body.email;
-    const accountno = req.body.accountno;
-    const address = req.body.address;
-    const mobile = req.body.mobile;
+    const accountno = "acountno.";
+    const address = "address";
+    const mobile = "mobile";
     const password = req.body.password;
     const cart = []
 
