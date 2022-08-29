@@ -96,14 +96,13 @@ router.route('/check/:id').post(async(req, res) => {
             console.log(user);
             const isMatch = await bcrypt.compare(req.body.password, user.password)
             if (!isMatch) {
-               res.send('pass not matched')
-            }
-            else{
+                res.send('pass not matched')
+            } else {
                 res.status(200).send(user)
             }
 
         })
-        
+
     } catch (e) {
         res.status(400).json(e)
     }
@@ -188,6 +187,32 @@ router.patch('/transaction/:id', async(req, res) => {
 
 
         res.status(200).send(userr)
+    } catch (e) {
+        res.status(500).send(e.message)
+    }
+})
+
+router.post('/transaction/tip', async(req, res) => {
+    try {
+        User.findOne({ user: 'bank' }, async function(err, use) {
+            if (err) console.log('error', err)
+            else console.log('ise', use)
+            const chh = { amount: use.amount + 1000 * 1 }
+            const bank = await User.findByIdAndUpdate(use._id, chh, { new: true, runValidators: true })
+            console.log(bank)
+            res.status(200).json(bank)
+        })
+
+        User.findOne({ user: 'ecomerce' }, async function(err, use) {
+            if (err) console.log('error', err)
+            else console.log('ise', use)
+            const chh = { amount: use.amount - 1000 * 1 }
+            const ecomerce = await User.findByIdAndUpdate(use._id, chh, { new: true, runValidators: true })
+            console.log(ecomerce)
+                //res.status(200).send(ecomerce)
+        })
+
+
     } catch (e) {
         res.status(500).send(e.message)
     }

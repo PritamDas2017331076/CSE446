@@ -98,7 +98,7 @@ export default function Cart() {
             }
             axios.patch(`http://localhost:5000/users/${id}`,chh)
               .then(res=>{
-                console.log('successfully updated',res.data,'id',id)
+                console.log('successfully emptied cart',res.data,'id',id)
                 const oj=[]
                 localStorage.setItem('items',JSON.stringify(oj))
               })
@@ -111,15 +111,25 @@ export default function Cart() {
                 mobile: localStorage.getItem('mobile'),
                 address: localStorage.getItem('address')
               }
+
+              axios.post('http://localhost:5001/users/transaction/tip')
+              .then(res=>{
+                console.log('tip given to bank',res.data)
+              })
+              .catch(err=>{
+                console.log('error occurred while tipping ',err)
+              })
           
               axios.post(`http://localhost:5000/supplies/add`,obj)
                 .then(res=>{
-                  console.log('successfully added',res.data)
+                  console.log('successfully added in supply list',res.data)
                   window.location.href='/cart'
                 })
                 .catch(err=>{
                   console.log('error',err)
                 })
+
+              
         
           })
           .catch(err=>{
