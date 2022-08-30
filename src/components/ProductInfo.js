@@ -15,8 +15,14 @@ import Navigation from './Navigation'
 import AddIcon from '@mui/icons-material/Add';
 import ShoppingCartRounded from '@mui/icons-material/ShoppingCartRounded'
 import { useNavigate } from 'react-router-dom'
+import MyAlert from './MyAlert'
+import Alert from '@mui/material/Alert';
+import Fade from '@mui/material/Fade';
+
 export default function ProductInfo(props) {
-    const navigate = useNavigate()
+  const navigate = useNavigate()
+  const [time,setTime] = useState(0)
+  const [alert,setAlert] = useState(0)
   const { state } = useLocation();
   const [count,setCount] = useState(0)
   const [amount,setAmount] = useState(0)
@@ -61,6 +67,10 @@ export default function ProductInfo(props) {
       const data=JSON.stringify(res.data.cart)
       localStorage.setItem('items',data);
       console.log('items',localStorage.getItem('items'))
+       setAlert(1)
+      // set alert to false after a fixed second
+      // clearTimeout()
+      // setTime(setTimeout(()=>{setAlert(0)},3000))
     })
     .catch(res=>{
       console.log('add to cart failed',res)
@@ -138,7 +148,8 @@ export default function ProductInfo(props) {
         <Button style={{marginLeft:50,marginTop:10}} variant="contained"  onClick = {checkout}>
             Checkout
         </Button>
-
+        
+        {alert?<Fade in={true} timeout={600}><Alert style={{marginLeft:100}}onClose={()=>setAlert(0)}>Item added to Cart!</Alert></Fade>:<></>}
     </div>
     </div>
     </div>

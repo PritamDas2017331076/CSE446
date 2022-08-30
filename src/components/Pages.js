@@ -1,10 +1,12 @@
 export const pgs = [
     {
-        name:'home',
+        name:'Home',
+        link:'home',
         func: ()=>{console.log('home')}
     },
     {
-        name:'about',
-        func: ()=>{console.log('about')}
+        name:'My Cart',
+        link:'cart',
+        func: ()=>{console.log('MY CART')}
     }
 ]

@@ -13,6 +13,8 @@ import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
+import MyTable from './MyTable';
+import Navigation from './Navigation'
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 const theme = createTheme();
 
@@ -20,22 +22,6 @@ export default function Cart() {
     let [items,setItems] = useState([])
     let [cost,setCost] = useState(0)
     useEffect(()=>{
-    //     data = [{
-    //         desc:'asd',
-    //         price:1323,
-    //         piece:3
-    //     },
-    //     {
-    //         desc:'efg',
-    //         price:3243,
-    //         piece:2
-    //     },
-    //     {
-    //         desc:'fsdfs',
-    //         price:444,
-    //         piece:7
-    //     }
-    // ]
         setItems(JSON.parse(localStorage.getItem('items')||"[]"))
     },[])
     const handleBuy = (e)=>{
@@ -136,45 +122,20 @@ export default function Cart() {
             console.log('error',err)
             alert('not enough money')
           })
-        // const chh={ 
-        //   cart:[]
-        // }
-        // axios.patch(`http://localhost:5000/users/${id}`,chh)
-        //   .then(res=>{
-        //     console.log('successfully updated',res.data,'id',id)
-        //     const oj=[]
-        //     localStorage.setItem('items',JSON.stringify(oj))
-        //   })
-        //   .catch(err=>{
-        //     console.log('error',err)
-        //   })
-    
-        // const obj= {
-        //   list: items,
-        //   id: id,
-        //   mobile: localStorage.getItem('mobile'),
-        //   address: localStorage.getItem('address')
-        // }
-    
-        // axios.post(`http://localhost:5000/supplies/add`,obj)
-        //   .then(res=>{
-        //     console.log('successfully added',res.data)
-        //   })
-        //   .catch(err=>{
-        //     console.log('error',err)
-        //   })
-        //window.location.href='/cart'
     
     
       }
   return (
     <div>
-        <div>
-            {items.map((item)=>
+        <Navigation/>
+        <div style={{padding:50}}>
+          <h3 style={{textAlign:'center'}}>Your cart</h3>
+            {/* {items.map((item)=>
              <div key={item.desc}>
                 name: {item.desc}  piece:{item.piece}  price:{item.price} <button onClick = {(e)=>deleteItem(e,item.desc,item.price)}><DeleteIcon/></button>
              </div>   
-            )}
+            )} */}
+              <MyTable obj = {items}/>
         </div>
         <div>
         <ThemeProvider theme={theme}>
@@ -182,7 +143,7 @@ export default function Cart() {
                 <CssBaseline />
                 <Box
                 sx={{
-                    marginTop: 8,
+                    
                     display: 'flex',
                     flexDirection: 'column',
                     alignItems: 'center',

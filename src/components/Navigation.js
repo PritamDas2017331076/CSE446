@@ -79,7 +79,7 @@ const ResponsiveAppBar = () => {
               textDecoration: 'none',
             }}
           >
-            LOGO
+            ESHOP
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -141,7 +141,7 @@ const ResponsiveAppBar = () => {
             {pgs.map((page) => (
               <Button
                 key={page.name}
-                onClick={(e)=>menuClick(e,page.name)}
+                onClick={(e)=>menuClick(e,page.link)}
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
                 {page.name}
