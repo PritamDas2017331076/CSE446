@@ -76,8 +76,6 @@ export default function MyTable() {
                   </TableCell>
                   <TableCell align="right">{item.piece}</TableCell>
                   <TableCell align="right">{item.price}</TableCell>
-                  {/* <TableCell align="right">{row.carbs}</TableCell>
-                  <TableCell align="right">{row.protein}</TableCell> */}
                   <TableCell align = "right"> <button onClick = {(e)=>deleteItem(e,item.desc,item.price)}><DeleteIcon/></button></TableCell>
                 </TableRow>
               ))}

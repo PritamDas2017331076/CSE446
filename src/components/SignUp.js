@@ -40,7 +40,7 @@ export default function SignIn() {
         localStorage.setItem('id',res.data.newUser._id)
         localStorage.setItem('user',res.data.newUser.user)
         console.log('token',localStorage.getItem('token'))
-        // navigate('/bank-info');
+        navigate('/bank-info');
         navigate('/home')
       })
       .catch((res)=>{

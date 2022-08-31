@@ -2,15 +2,18 @@ import logo from './logo.svg';
 import './App.css';
 import ResponsiveAppBar from './components/Navigation';
 import SignIn from './components/SignIn';
-import {Link,Routes,Route} from 'react-router-dom'
+import Button from '@mui/material/Button';
+import {Link,Routes,Route,useNavigate} from 'react-router-dom'
 function App() {
+  const navigate = useNavigate()
   return (
     <div className="App">
-      hello
+      <h2>Welcome to Eshop</h2>
       <div>
-        <Link to = '/sign-in'>
-          Go to website
-        </Link>
+        <Button onClick = {()=>navigate('/sign-in')} variant="contained">User</Button>
+        <br/>
+        <Button style={{marginTop:30}} onClick = {()=>navigate('/supply')} variant="contained">Supplier</Button>
+        
       </div>
     </div>
   );
